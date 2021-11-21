@@ -53,7 +53,7 @@
                             <Label Content="Yearly"
                                    Style="{DynamicResource LabelHeader}"/>
                             
-                            <TextBlock Text="{Binding PooYearly}"
+                            <TextBlock Text="{Binding PooPayYearly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
 
@@ -63,7 +63,7 @@
                             <Label Content="Monthly"
                                    Style="{DynamicResource LabelHeader}"/>
 
-                            <TextBlock Text="{Binding PooMonthly}"
+                            <TextBlock Text="{Binding PooPayMonthly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
 
@@ -73,98 +73,303 @@
                             <Label Content="Weekly"
                                    Style="{DynamicResource LabelHeader}"/>
 
-                            <TextBlock Text="{Binding PooWeekly}"
+                            <TextBlock Text="{Binding PooPayWeekly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
                     </Grid>
                 </materialDesign:Card>
 
                 <Grid Grid.Row="1"
-                      Grid.Column="0">
+                      Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      MinWidth="550"
+                      Margin="30 0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="1"
-                                         MinWidth="550"
-                                         HorizontalAlignment="Center"
+                                         Grid.RowSpan="1"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
-                    <Label Content="1. Payment"
-                           Style="{DynamicResource LabelHeader}"/>
+                    <Label Content="1. Salary"
+                           Style="{DynamicResource LabelHeader}"
+                           Margin="0 0 0 10"/>
 
-                    <StackPanel HorizontalAlignment="Center"
-                                MinWidth="550"
-                                Margin="5"
+                    <StackPanel Margin="5"
                                 Grid.Row="1">
 
-                        <Label Content="Select your pay method"
+                        <Label Content="Select your pay method (Double Click)"
                                Margin="10 10 10 0"
                                Foreground="{DynamicResource MaterialDesignBodyLight}"/>
 
                         <StackPanel Orientation="Horizontal"
                                     Margin="10 0 10 10">
                             <RadioButton GroupName="pay"
-                                         Content="Daily"/>
+                                         Content="Hourly"
+                                         IsChecked="{Binding PayPeriodHourly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Release"/>
+
+                            <RadioButton GroupName="pay"
+                                         Content="Weekly"
+                                         IsChecked="{Binding PayPeriodWeekly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Release"/>
+
+                            <RadioButton GroupName="pay"
+                                         Content="Monthly"
+                                         IsChecked="{Binding PayPeriodMonthly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Press"/>
                             
                             <RadioButton GroupName="pay"
-                                         Content="Monthly"/>
-                            
-                            <RadioButton GroupName="pay"
-                                         Content="Yearly"/>
+                                         Content="Yearly"
+                                         IsChecked="{Binding PayPeriodYearly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Press"/>
                         </StackPanel>
-                        
+
+
+                        <Label Content="{Binding PayPeriodText, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                               Margin="10 10 10 0"
+                               Foreground="{DynamicResource MaterialDesignBodyLight}"/>
+
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
                                  materialDesign:HintAssist.Hint="Enter Pay Amount"
                                  Margin="10"
-                                 Text="{Binding Amount}"
+                                 Text="{Binding PayAmount}"
                                  Foreground="White"/>
-
                     </StackPanel>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                                <Setter Property="FontFamily" Value="Segoe UI SemiBold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource LabelHeader}">
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5 0"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type materialDesign:Card}">
+                                <Setter Property="Background" Value="{DynamicResource MaterialDesignCardBackground}"/>
+                            </Style>
+                        </Grid.Resources>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="0"
+                                             Margin="0 10 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Yearly Salary"/>
+                                <TextBlock Text="{Binding SalaryYearly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="1"
+                                             Margin="5 10 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Monthly Salary"/>
+                                <TextBlock Text="{Binding SalaryMonthly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="0"
+                                             Margin="0 5 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Weekly Salary"/>
+                                <TextBlock Text="{Binding SalaryWeekly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="1"
+                                             Margin="5 5 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Hourly Salary"/>
+                                <TextBlock Text="{Binding SalaryHourly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="1"
-                      Grid.Column="1">
+                      Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      MinWidth="550"
+                      Margin="30 0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="1"
-                                         MinWidth="550"
-                                         HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
-                    <Label Content="2. Frequency"
-                           Style="{DynamicResource LabelHeader}"/>
+                    <Label Content="2. Personal Details"
+                           Style="{DynamicResource LabelHeader}"
+                           Margin="0 0 0 10"/>
 
-                    <StackPanel HorizontalAlignment="Center"
-                                MinWidth="550"
-                                Margin="5"
+                    <StackPanel Margin="5"
                                 Grid.Row="1">
                         
-                        <Label Content="On a Daily Basis you spend"
+                        <Label Content="Average Time Spent"
                                Foreground="{DynamicResource MaterialDesignBodyLight}"
                                Margin="10 10 10 0"/>
 
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
-                                 materialDesign:HintAssist.Hint="Duration in Minutes"
+                                 materialDesign:HintAssist.Hint="Duration in Minutes (e.g. 15)" 
                                  Foreground="White"
-                                 Text="{Binding Duration}"
+                                 Text="{Binding PooDuration}"
                                  Margin="10 0 10 10"/>
 
-                        <Label Content="On a Daily Basis you go"
+                        <Label Content="Average Frequency per Day"
                                Foreground="{DynamicResource MaterialDesignBodyLight}"
                                Margin="10 10 10 0"/>
 
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
-                                 materialDesign:HintAssist.Hint="Frequency per day"
+                                 materialDesign:HintAssist.Hint="Frequency per day (e.g. 4)"
                                  Foreground="White"
-                                 Text="{Binding Iteration}"
+                                 Text="{Binding PooFrequency}"
                                  Margin="10 0 10 10"/>
                     </StackPanel>
-                    
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                                <Setter Property="FontFamily" Value="Segoe UI SemiBold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource LabelHeader}">
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5 0"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type materialDesign:Card}">
+                                <Setter Property="Background" Value="{DynamicResource MaterialDesignCardBackground}"/>
+                            </Style>
+                        </Grid.Resources>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="0"
+                                             Margin="0 10 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Poo Time Yearly"/>
+                                <TextBlock Text="{Binding PooTimeYearly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="1"
+                                             Margin="5 10 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Poo Time Monthly"/>
+                                <TextBlock Text="{Binding PooTimeMonthly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="0"
+                                             Margin="0 5 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Poo Time Weekly"/>
+                                <TextBlock Text="{Binding PooTimeWeekly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="1"
+                                             Margin="5 5 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Poo Time Daily"/>
+                                <TextBlock Text="{Binding PooTimeDaily, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="2"
@@ -177,7 +382,7 @@
 
                     <Separator VerticalAlignment="Top"
                                HorizontalAlignment="Stretch"
-                               Margin="5 0"
+                               Margin="50 0"
                                Background="{DynamicResource MaterialDesignLightSeparatorBackground}"/>
 
                     <Label Content="3. Calculate"
