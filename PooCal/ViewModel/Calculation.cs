@@ -25,6 +25,11 @@ namespace PooCal.ViewModel
         private string pooPayMonthly;
         private string pooPayWeekly;
 
+        private double pooTimeDaily;
+        private double pooTimeWeekly;
+        private double pooTimeMonthly;
+        private double pooTimeYearly;
+
         public Calculation()
         {
 
@@ -49,6 +54,40 @@ namespace PooCal.ViewModel
             PooPayYearly = $"{string.Format("£{0:N2}", payPerYear)}";
         }
 
+        private string FormatPooTimeText(double value)
+        {
+            var convertTime = TimeSpan.FromMinutes(value);
+            var hours = (int)convertTime.TotalHours;
+            var minutes = convertTime.Minutes;
+            var text = $"{hours}";
+
+            if (hours == 1)
+                text += " hour";
+            else
+                text += " hours";
+
+            text += $" {minutes}";
+
+            if (minutes == 1)
+                text += " minute";
+            else
+                text += " minutes";
+          
+            return text;
+        }
+
+        private void CalculatePooTime()
+        {
+            pooTimeDaily = ((pooDuration / 60) * pooFrequency) * 60;
+            pooTimeWeekly = pooTimeDaily * 5;
+            pooTimeMonthly = pooTimeWeekly * 4;
+            pooTimeYearly = pooTimeMonthly * 12;
+
+            OnPropertyChanged(nameof(PooTimeDaily));
+            OnPropertyChanged(nameof(PooTimeWeekly));
+            OnPropertyChanged(nameof(PooTimeMonthly));
+            OnPropertyChanged(nameof(PooTimeYearly));
+        }
 
         private void CalculatePayInput()
         {
@@ -80,6 +119,11 @@ namespace PooCal.ViewModel
                 salaryWeekly = salaryMonthly / 4;
                 salaryHourly = salaryWeekly / 35;
             }
+
+            OnPropertyChanged(nameof(SalaryYearly));
+            OnPropertyChanged(nameof(SalaryMonthly));
+            OnPropertyChanged(nameof(SalaryWeekly));
+            OnPropertyChanged(nameof(SalaryHourly));
         }
 
         public string PooPayYearly
@@ -118,6 +162,7 @@ namespace PooCal.ViewModel
             set
             {
                 pooDuration = Convert.ToDouble(value.ToString());
+                CalculatePooTime();
                 OnPropertyChanged();
             }
         }
@@ -128,7 +173,9 @@ namespace PooCal.ViewModel
             set
             {
                 pooFrequency = Convert.ToInt32(value.ToString());
+                CalculatePooTime();
                 OnPropertyChanged();
+
             }
         }
 
@@ -139,6 +186,7 @@ namespace PooCal.ViewModel
             {
                 payPeriod = value;
                 PayPeriodText = $"Enter your {value} pay";
+                CalculatePayInput();
                 OnPropertyChanged();
             }
         }
@@ -158,6 +206,7 @@ namespace PooCal.ViewModel
             set
             {
                 PayPeriod = payPeriodType.Hourly.ToString();
+                CalculatePayInput();
                 OnPropertyChanged();
             }
         }
@@ -167,6 +216,7 @@ namespace PooCal.ViewModel
             set
             {
                 PayPeriod = payPeriodType.Weekly.ToString();
+                CalculatePayInput();
                 OnPropertyChanged();
             }
         }
@@ -176,6 +226,7 @@ namespace PooCal.ViewModel
             set
             {
                 PayPeriod = payPeriodType.Monthly.ToString();
+                CalculatePayInput();
                 OnPropertyChanged();
             }
         }
@@ -185,6 +236,7 @@ namespace PooCal.ViewModel
             set
             {
                 PayPeriod = payPeriodType.Yearly.ToString();
+                CalculatePayInput();
                 OnPropertyChanged();
             }
         }
@@ -197,10 +249,6 @@ namespace PooCal.ViewModel
                 payAmount = Convert.ToDouble(value);
                 CalculatePayInput();
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(SalaryYearly));
-                OnPropertyChanged(nameof(SalaryMonthly));
-                OnPropertyChanged(nameof(SalaryWeekly));
-                OnPropertyChanged(nameof(SalaryHourly));
             }
         }
 
@@ -240,6 +288,46 @@ namespace PooCal.ViewModel
             set
             {
                 salaryHourly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string PooTimeDaily
+        {
+            get => FormatPooTimeText(pooTimeDaily);
+            set
+            {
+                pooTimeDaily = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string PooTimeWeekly
+        {
+            get => FormatPooTimeText(pooTimeWeekly);
+            set
+            {
+                pooTimeWeekly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string PooTimeMonthly
+        {
+            get => FormatPooTimeText(pooTimeMonthly);
+            set
+            {
+                pooTimeMonthly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string PooTimeYearly
+        {
+            get => FormatPooTimeText(pooTimeYearly);
+            set
+            {
+                pooTimeYearly = Convert.ToDouble(value);
                 OnPropertyChanged();
             }
         }
