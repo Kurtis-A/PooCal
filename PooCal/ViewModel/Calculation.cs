@@ -6,14 +6,24 @@ namespace PooCal.ViewModel
 {
     public class Calculation : ViewModelBase
     {
-        private double duration;
-        private int iteration;
-        private string payPeriod;
-        private double amount;
 
-        private string pooYearly;
-        private string pooMonthly;
-        private string pooWeekly;
+        private enum payPeriodType { Hourly, Weekly, Monthly, Yearly};
+
+        private double payAmount;
+        private string payPeriod;
+        private string payPeriodText;
+
+        private double salaryHourly;
+        private double salaryWeekly;
+        private double salaryMonthly;
+        private double salaryYearly;
+
+        private double pooDuration;
+        private double pooFrequency;
+
+        private string pooPayYearly;
+        private string pooPayMonthly;
+        private string pooPayWeekly;
 
         public Calculation()
         {
@@ -23,68 +33,101 @@ namespace PooCal.ViewModel
         private ICommand _calculate;
         public ICommand Calculate => _calculate ??= new CommandHandler(() => CalculatePay(), () => true);
 
-
         public void CalculatePay()
         {
-            var pooPerDay = (duration / 60) * iteration;
+            CalculatePayInput();
+
+            var pooPerDay = (pooDuration / 60) * pooFrequency;
             var pooPerWeek = pooPerDay * 5;
 
-            var payPerWeek = pooPerWeek * amount;
+            var payPerWeek = pooPerWeek * salaryHourly;
             var payPerMonth = payPerWeek * 4;
             var payPerYear = payPerMonth * 12;
 
-            PooWeekly = $"{string.Format("£{0:N2}", payPerWeek)}";
-            PooMonthly = $"{string.Format("£{0:N2}", payPerMonth)}";
-            PooYearly = $"{string.Format("£{0:N2}", payPerYear)}";
+            PooPayWeekly = $"{string.Format("£{0:N2}", payPerWeek)}";
+            PooPayMonthly = $"{string.Format("£{0:N2}", payPerMonth)}";
+            PooPayYearly = $"{string.Format("£{0:N2}", payPerYear)}";
         }
 
 
-        public string PooYearly
+        private void CalculatePayInput()
         {
-            get => pooYearly;
+            if (PayPeriod == payPeriodType.Hourly.ToString())
+            {
+                salaryHourly = payAmount;
+                salaryWeekly = salaryHourly * 35;
+                salaryMonthly = salaryWeekly * 4;
+                salaryYearly = salaryMonthly * 12;
+            }
+            else if (PayPeriod == payPeriodType.Weekly.ToString())
+            {
+                salaryWeekly = payAmount;
+                salaryHourly = salaryWeekly / 35;
+                salaryMonthly = salaryWeekly * 4;
+                salaryYearly = salaryMonthly * 12;
+            }
+            else if (PayPeriod == payPeriodType.Monthly.ToString())
+            {
+                salaryMonthly = payAmount;
+                salaryWeekly = payAmount / 4;
+                salaryHourly = salaryWeekly / 35;
+                salaryYearly = salaryMonthly * 12;
+            }
+            else if (PayPeriod == payPeriodType.Yearly.ToString())
+            {
+                salaryYearly = payAmount;
+                salaryMonthly = payAmount / 12;
+                salaryWeekly = salaryMonthly / 4;
+                salaryHourly = salaryWeekly / 35;
+            }
+        }
+
+        public string PooPayYearly
+        {
+            get => pooPayYearly;
             set
             {
-                pooYearly = value;
+                pooPayYearly = value;
                 OnPropertyChanged();
             }
         }
 
-        public string PooMonthly
+        public string PooPayMonthly
         {
-            get => pooMonthly;
+            get => pooPayMonthly;
             set
             {
-                pooMonthly = value;
+                pooPayMonthly = value;
                 OnPropertyChanged();
             }
         }
 
-        public string PooWeekly
+        public string PooPayWeekly
         {
-            get => pooWeekly;
+            get => pooPayWeekly;
             set
             {
-                pooWeekly = value;
+                pooPayWeekly = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Duration
+        public string PooDuration
         {
-            get => duration.ToString();
+            get => pooDuration.ToString();
             set
             {
-                duration = Convert.ToDouble(value.ToString());
+                pooDuration = Convert.ToDouble(value.ToString());
                 OnPropertyChanged();
             }
         }
 
-        public string Iteration
+        public string PooFrequency
         {
-            get => iteration.ToString();
+            get => pooFrequency.ToString();
             set
             {
-                iteration = Convert.ToInt32(value.ToString());
+                pooFrequency = Convert.ToInt32(value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -95,16 +138,108 @@ namespace PooCal.ViewModel
             set
             {
                 payPeriod = value;
+                PayPeriodText = $"Enter your {value} pay";
                 OnPropertyChanged();
             }
         }
 
-        public string Amount
+        public string PayPeriodText
         {
-            get => amount.ToString();
+            get => payPeriodText;
             set
             {
-                amount = Convert.ToDouble(value);
+                payPeriodText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PayPeriodHourly
+        {
+            set
+            {
+                PayPeriod = payPeriodType.Hourly.ToString();
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PayPeriodWeekly
+        {
+            set
+            {
+                PayPeriod = payPeriodType.Weekly.ToString();
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PayPeriodMonthly
+        {
+            set
+            {
+                PayPeriod = payPeriodType.Monthly.ToString();
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PayPeriodYearly
+        {
+            set
+            {
+                PayPeriod = payPeriodType.Yearly.ToString();
+                OnPropertyChanged();
+            }
+        }
+
+        public string PayAmount
+        {
+            get => payAmount.ToString();
+            set
+            {
+                payAmount = Convert.ToDouble(value);
+                CalculatePayInput();
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SalaryYearly));
+                OnPropertyChanged(nameof(SalaryMonthly));
+                OnPropertyChanged(nameof(SalaryWeekly));
+                OnPropertyChanged(nameof(SalaryHourly));
+            }
+        }
+
+        public string SalaryYearly
+        {
+            get => string.Format("£{0:N2}",salaryYearly);
+            set
+            {
+                salaryYearly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryMonthly
+        {
+            get => string.Format("£{0:N2}", salaryMonthly);
+            set
+            {
+                salaryMonthly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryWeekly
+        {
+            get => string.Format("£{0:N2}", salaryWeekly);
+            set
+            {
+                salaryWeekly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryHourly
+        {
+            get => string.Format("£{0:N2}", salaryHourly);
+            set
+            {
+                salaryHourly = Convert.ToDouble(value);
                 OnPropertyChanged();
             }
         }
