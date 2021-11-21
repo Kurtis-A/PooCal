@@ -53,7 +53,7 @@
                             <Label Content="Yearly"
                                    Style="{DynamicResource LabelHeader}"/>
                             
-                            <TextBlock Text="{Binding PooYearly}"
+                            <TextBlock Text="{Binding PooPayYearly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
 
@@ -63,7 +63,7 @@
                             <Label Content="Monthly"
                                    Style="{DynamicResource LabelHeader}"/>
 
-                            <TextBlock Text="{Binding PooMonthly}"
+                            <TextBlock Text="{Binding PooPayMonthly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
 
@@ -73,7 +73,7 @@
                             <Label Content="Weekly"
                                    Style="{DynamicResource LabelHeader}"/>
 
-                            <TextBlock Text="{Binding PooWeekly}"
+                            <TextBlock Text="{Binding PooPayWeekly}"
                                        Style="{DynamicResource TextBlockHeader}"/>
                         </StackPanel>
                     </Grid>
@@ -84,9 +84,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="1"
+                                         Grid.RowSpan="2"
                                          MinWidth="550"
                                          HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
@@ -99,28 +101,49 @@
                                 Margin="5"
                                 Grid.Row="1">
 
-                        <Label Content="Select your pay method"
+                        <Label Content="Select your pay method (Double Click)"
                                Margin="10 10 10 0"
                                Foreground="{DynamicResource MaterialDesignBodyLight}"/>
 
                         <StackPanel Orientation="Horizontal"
                                     Margin="10 0 10 10">
                             <RadioButton GroupName="pay"
-                                         Content="Daily"/>
+                                         Content="Hourly"
+                                         IsChecked="{Binding PayPeriodHourly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Release"/>
+
+                            <RadioButton GroupName="pay"
+                                         Content="Weekly"
+                                         IsChecked="{Binding PayPeriodWeekly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Release"/>
+
+                            <RadioButton GroupName="pay"
+                                         Content="Monthly"
+                                         IsChecked="{Binding PayPeriodMonthly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Press"/>
                             
                             <RadioButton GroupName="pay"
-                                         Content="Monthly"/>
-                            
-                            <RadioButton GroupName="pay"
-                                         Content="Yearly"/>
+                                         Content="Yearly"
+                                         IsChecked="{Binding PayPeriodYearly, Mode=OneWayToSource, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ClickMode="Press"/>
                         </StackPanel>
+
+
+                        <Label Content="{Binding PayPeriodText, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                               Margin="10 10 10 0"
+                               Foreground="{DynamicResource MaterialDesignBodyLight}"/>
                         
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
                                  materialDesign:HintAssist.Hint="Enter Pay Amount"
                                  Margin="10"
-                                 Text="{Binding Amount}"
+                                 Text="{Binding PayAmount}"
                                  Foreground="White"/>
 
+                        <Separator Grid.Row="2"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Stretch"
+                                   Margin="5 0"
+                                   Style="{DynamicResource MaterialDesignLightSeparator}"/>
                     </StackPanel>
                 </Grid>
 
@@ -151,7 +174,7 @@
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
                                  materialDesign:HintAssist.Hint="Duration in Minutes"
                                  Foreground="White"
-                                 Text="{Binding Duration}"
+                                 Text="{Binding PooDuration}"
                                  Margin="10 0 10 10"/>
 
                         <Label Content="On a Daily Basis you go"
@@ -161,7 +184,7 @@
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
                                  materialDesign:HintAssist.Hint="Frequency per day"
                                  Foreground="White"
-                                 Text="{Binding Iteration}"
+                                 Text="{Binding PooFrequency}"
                                  Margin="10 0 10 10"/>
                     </StackPanel>
                     
