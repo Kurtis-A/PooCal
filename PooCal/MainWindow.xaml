@@ -80,7 +80,10 @@
                 </materialDesign:Card>
 
                 <Grid Grid.Row="1"
-                      Grid.Column="0">
+                      Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      MinWidth="550"
+                      Margin="30 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition />
@@ -89,16 +92,12 @@
 
                     <materialDesign:Card Grid.Row="1"
                                          Grid.RowSpan="1"
-                                         MinWidth="550"
-                                         HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
                     <Label Content="1. Salary"
                            Style="{DynamicResource LabelHeader}"/>
 
-                    <StackPanel HorizontalAlignment="Center"
-                                MinWidth="550"
-                                Margin="5"
+                    <StackPanel Margin="5"
                                 Grid.Row="1">
 
                         <Label Content="Select your pay method (Double Click)"
@@ -140,9 +139,7 @@
                                  Foreground="White"/>
                     </StackPanel>
 
-                    <Grid Grid.Row="2"
-                          HorizontalAlignment="Center"
-                          MinWidth="550">
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -240,23 +237,23 @@
                 </Grid>
 
                 <Grid Grid.Row="1"
-                      Grid.Column="1">
+                      Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      MinWidth="550"
+                      Margin="30 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
+                        <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="1"
-                                         MinWidth="550"
-                                         HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
                     <Label Content="2. Personal Details"
                            Style="{DynamicResource LabelHeader}"/>
 
-                    <StackPanel HorizontalAlignment="Center"
-                                MinWidth="550"
-                                Margin="5"
+                    <StackPanel Margin="5"
                                 Grid.Row="1">
                         
                         <Label Content="Average Time Spent"
@@ -279,6 +276,8 @@
                                  Text="{Binding PooFrequency}"
                                  Margin="10 0 10 10"/>
                     </StackPanel>
+                    
+                    
                     
                 </Grid>
 
