@@ -93,7 +93,7 @@
                                          HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
-                    <Label Content="1. Payment"
+                    <Label Content="1. Salary"
                            Style="{DynamicResource LabelHeader}"/>
 
                     <StackPanel HorizontalAlignment="Center"
@@ -251,7 +251,7 @@
                                          HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
 
-                    <Label Content="2. Frequency"
+                    <Label Content="2. Personal Details"
                            Style="{DynamicResource LabelHeader}"/>
 
                     <StackPanel HorizontalAlignment="Center"
