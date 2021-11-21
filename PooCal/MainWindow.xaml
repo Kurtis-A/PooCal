@@ -88,7 +88,7 @@
                     </Grid.RowDefinitions>
 
                     <materialDesign:Card Grid.Row="1"
-                                         Grid.RowSpan="2"
+                                         Grid.RowSpan="1"
                                          MinWidth="550"
                                          HorizontalAlignment="Center"
                                          Background="{DynamicResource MaterialDesignDarkBackground}"/>
@@ -132,19 +132,111 @@
                         <Label Content="{Binding PayPeriodText, Mode=OneWay, NotifyOnSourceUpdated=True}"
                                Margin="10 10 10 0"
                                Foreground="{DynamicResource MaterialDesignBodyLight}"/>
-                        
+
                         <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
                                  materialDesign:HintAssist.Hint="Enter Pay Amount"
                                  Margin="10"
                                  Text="{Binding PayAmount}"
                                  Foreground="White"/>
-
-                        <Separator Grid.Row="2"
-                                   VerticalAlignment="Top"
-                                   HorizontalAlignment="Stretch"
-                                   Margin="5 0"
-                                   Style="{DynamicResource MaterialDesignLightSeparator}"/>
                     </StackPanel>
+
+                    <Grid Grid.Row="2"
+                          HorizontalAlignment="Center"
+                          MinWidth="550">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                                <Setter Property="FontFamily" Value="Segoe UI SemiBold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource LabelHeader}">
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5 0"/>
+                            </Style>
+
+                            <Style TargetType="{x:Type materialDesign:Card}">
+                                <Setter Property="Background" Value="{DynamicResource MaterialDesignCardBackground}"/>
+                            </Style>
+                        </Grid.Resources>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="0"
+                                             Margin="0 10 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Yearly Salary"/>
+                                <TextBlock Text="{Binding SalaryYearly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="0"
+                                             Grid.Column="1"
+                                             Margin="5 10 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Monthly Salary"/>
+                                <TextBlock Text="{Binding SalaryMonthly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="0"
+                                             Margin="0 5 5 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Weekly Salary"/>
+                                <TextBlock Text="{Binding SalaryWeekly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Row="1"
+                                             Grid.Column="1"
+                                             Margin="5 5 0 5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Hourly Salary"/>
+                                <TextBlock Text="{Binding SalaryHourly, Mode=OneWay, NotifyOnSourceUpdated=True}"
+                                           Grid.Row="1"/>
+
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="1"
@@ -200,7 +292,7 @@
 
                     <Separator VerticalAlignment="Top"
                                HorizontalAlignment="Stretch"
-                               Margin="5 0"
+                               Margin="50 0"
                                Background="{DynamicResource MaterialDesignLightSeparatorBackground}"/>
 
                     <Label Content="3. Calculate"

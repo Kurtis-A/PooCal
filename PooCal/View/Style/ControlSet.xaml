@@ -10,7 +10,7 @@
     <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}">
         <Setter Property="MinWidth" Value="60"/>
         <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFilledTextBox}">

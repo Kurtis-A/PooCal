@@ -195,6 +195,51 @@ namespace PooCal.ViewModel
             set
             {
                 payAmount = Convert.ToDouble(value);
+                CalculatePayInput();
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SalaryYearly));
+                OnPropertyChanged(nameof(SalaryMonthly));
+                OnPropertyChanged(nameof(SalaryWeekly));
+                OnPropertyChanged(nameof(SalaryHourly));
+            }
+        }
+
+        public string SalaryYearly
+        {
+            get => string.Format("£{0:N2}",salaryYearly);
+            set
+            {
+                salaryYearly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryMonthly
+        {
+            get => string.Format("£{0:N2}", salaryMonthly);
+            set
+            {
+                salaryMonthly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryWeekly
+        {
+            get => string.Format("£{0:N2}", salaryWeekly);
+            set
+            {
+                salaryWeekly = Convert.ToDouble(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string SalaryHourly
+        {
+            get => string.Format("£{0:N2}", salaryHourly);
+            set
+            {
+                salaryHourly = Convert.ToDouble(value);
                 OnPropertyChanged();
             }
         }
