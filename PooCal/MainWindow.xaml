@@ -1,0 +1,271 @@
+﻿<Window x:Class="PooCal.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PooCal"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Height="900" 
+        Width="1300"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        FontFamily="Segoe UI Semilight">
+    
+    <Border CornerRadius="20"
+            Background="{DynamicResource MaterialDesignDarkBackground}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition />
+                    <RowDefinition Height="180"/>
+                </Grid.RowDefinitions>
+
+                <!--Summary Card-->
+                <materialDesign:Card Grid.Row="0"
+                                     Grid.ColumnSpan="2"
+                                     Margin="50 40"
+                                     Background="{DynamicResource MaterialDesignCardBackground}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Label Content="Yearly"
+                                   Style="{DynamicResource LabelHeader}"/>
+                            
+                            <TextBlock Text="{Binding PooYearly}"
+                                       Style="{DynamicResource TextBlockHeader}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Label Content="Monthly"
+                                   Style="{DynamicResource LabelHeader}"/>
+
+                            <TextBlock Text="{Binding PooMonthly}"
+                                       Style="{DynamicResource TextBlockHeader}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Label Content="Weekly"
+                                   Style="{DynamicResource LabelHeader}"/>
+
+                            <TextBlock Text="{Binding PooWeekly}"
+                                       Style="{DynamicResource TextBlockHeader}"/>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+
+                <Grid Grid.Row="1"
+                      Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <materialDesign:Card Grid.Row="1"
+                                         MinWidth="550"
+                                         HorizontalAlignment="Center"
+                                         Background="{DynamicResource MaterialDesignDarkBackground}"/>
+
+                    <Label Content="1. Payment"
+                           Style="{DynamicResource LabelHeader}"/>
+
+                    <StackPanel HorizontalAlignment="Center"
+                                MinWidth="550"
+                                Margin="5"
+                                Grid.Row="1">
+
+                        <Label Content="Select your pay method"
+                               Margin="10 10 10 0"
+                               Foreground="{DynamicResource MaterialDesignBodyLight}"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10 0 10 10">
+                            <RadioButton GroupName="pay"
+                                         Content="Daily"/>
+                            
+                            <RadioButton GroupName="pay"
+                                         Content="Monthly"/>
+                            
+                            <RadioButton GroupName="pay"
+                                         Content="Yearly"/>
+                        </StackPanel>
+                        
+                        <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
+                                 materialDesign:HintAssist.Hint="Enter Pay Amount"
+                                 Margin="10"
+                                 Text="{Binding Amount}"
+                                 Foreground="White"/>
+
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <materialDesign:Card Grid.Row="1"
+                                         MinWidth="550"
+                                         HorizontalAlignment="Center"
+                                         Background="{DynamicResource MaterialDesignDarkBackground}"/>
+
+                    <Label Content="2. Frequency"
+                           Style="{DynamicResource LabelHeader}"/>
+
+                    <StackPanel HorizontalAlignment="Center"
+                                MinWidth="550"
+                                Margin="5"
+                                Grid.Row="1">
+                        
+                        <Label Content="On a Daily Basis you spend"
+                               Foreground="{DynamicResource MaterialDesignBodyLight}"
+                               Margin="10 10 10 0"/>
+
+                        <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
+                                 materialDesign:HintAssist.Hint="Duration in Minutes"
+                                 Foreground="White"
+                                 Text="{Binding Duration}"
+                                 Margin="10 0 10 10"/>
+
+                        <Label Content="On a Daily Basis you go"
+                               Foreground="{DynamicResource MaterialDesignBodyLight}"
+                               Margin="10 10 10 0"/>
+
+                        <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}"
+                                 materialDesign:HintAssist.Hint="Frequency per day"
+                                 Foreground="White"
+                                 Text="{Binding Iteration}"
+                                 Margin="10 0 10 10"/>
+                    </StackPanel>
+                    
+                </Grid>
+
+                <Grid Grid.Row="2"
+                      Grid.ColumnSpan="2"
+                      Margin="0 20 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Separator VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               Margin="5 0"
+                               Background="{DynamicResource MaterialDesignLightSeparatorBackground}"/>
+
+                    <Label Content="3. Calculate"
+                           Style="{DynamicResource LabelHeader}"
+                           />
+
+                    <Button Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignPaperDarkButton}"
+                            Height="60"
+                            Width="280"
+                            Command="{Binding Calculate}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Calculator"
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"
+                                                     Height="25"
+                                                     Width="25"
+                                                     Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                            <TextBlock Text="What's my poo pay"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0"
+                                       FontSize="22"
+                                       Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+
+
+          
+            <!--Header-->
+            <materialDesign:Card Grid.Row="0"
+                                 Background="{DynamicResource PrimaryHueMidBrush}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Logo & Icon-->
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="0">
+
+                        <materialDesign:PackIcon Kind="EmoticonPoop"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             Margin="5 0"
+                                             Foreground="#BCAAA4"
+                                             Width="35"
+                                             Height="35"/>
+
+                        <TextBlock Text="Poocal"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" 
+                                   FontSize="34" 
+                                   Foreground="#BCAAA4"
+                                   Margin="5 0"/>
+                        
+                    </StackPanel>
+
+                    <!--Window Controls-->
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="2"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Right">
+                        
+                        <Button Style="{StaticResource WindowButton}"
+                                Click="Minimise_Click">
+                            <materialDesign:PackIcon Kind="WindowMinimize"/>
+                        </Button>
+                        
+                        <Button Style="{StaticResource WindowButton}"
+                                Click="Maximise_Click">
+                            <materialDesign:PackIcon Kind="DockWindow"/>
+                        </Button>
+                        
+                        <Button Style="{StaticResource WindowButton}"
+                                Click="Close_Click">
+                            <materialDesign:PackIcon Kind="WindowClose"/>
+                        </Button>      
+                        
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Border>
+</Window>

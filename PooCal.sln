@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PooCal", "PooCal\PooCal.csproj", "{52708448-8A4D-4D8E-9D8F-B3118E8DA860}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52708448-8A4D-4D8E-9D8F-B3118E8DA860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52708448-8A4D-4D8E-9D8F-B3118E8DA860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52708448-8A4D-4D8E-9D8F-B3118E8DA860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52708448-8A4D-4D8E-9D8F-B3118E8DA860}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D00601C7-6CFA-4DC8-9D98-D3618E9B04D4}
+	EndGlobalSection
+EndGlobal
