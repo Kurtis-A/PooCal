@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         Height="900" 
         Width="1300"
+        Title="Poocal"
         AllowsTransparency="True"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
@@ -430,13 +431,11 @@
                     <StackPanel Orientation="Horizontal"
                                 Grid.Column="0">
 
-                        <materialDesign:PackIcon Kind="EmoticonPoop"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"
-                                             Margin="5 0"
-                                             Foreground="#BCAAA4"
-                                             Width="35"
-                                             Height="35"/>
+                        <Image Source="View\Resource\Poocal Icon.png"
+                               Stretch="Fill"
+                               Width="35"
+                               Height="35"
+                               Margin="10 0"/>
 
                         <TextBlock Text="Poocal"
                                    VerticalAlignment="Center"
